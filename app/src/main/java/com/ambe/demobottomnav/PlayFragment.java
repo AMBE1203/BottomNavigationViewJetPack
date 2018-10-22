@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import com.ambe.demobottomnav.databinding.FragmentPlayBinding;
 
+import org.greenrobot.eventbus.EventBus;
+
 import androidx.navigation.Navigation;
 
 
@@ -19,6 +21,7 @@ import androidx.navigation.Navigation;
 public class PlayFragment extends Fragment {
 
     private FragmentPlayBinding binding;
+    private SwipeFragment swipeFragment;
 
 
     public PlayFragment() {
@@ -35,6 +38,13 @@ public class PlayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigateUp();
+            }
+        });
+
+        binding.btnGoToPlaySwipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().postSticky(new MessageEvent("Hey event subscriber!"));
             }
         });
         return binding.getRoot();
